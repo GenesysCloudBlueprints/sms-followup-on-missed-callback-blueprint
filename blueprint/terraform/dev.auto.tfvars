@@ -1,0 +1,5 @@
+callback_sms_oauthclient="3dfb45d2-acbd-4709-a652-4114f1d782b8"
+callback_sms_oauthsecret="kmbvxWqwObEg7ZYGd1UWEo0PC2iKu22OwCPz0pgQj5M"
+callback_originating_sms_phonenumber="+19206773490"
+callback_phonenumber="+18005551213"
+callback_agent_email="john.carnell@genesys.com"

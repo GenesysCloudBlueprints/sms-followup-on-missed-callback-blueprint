@@ -1,0 +1,127 @@
+workflow:
+  name: Agentless SMS Trigger Workflow
+  division: Home
+  startUpRef: "/workflow/states/state[Initial State_10]"
+  defaultLanguage: en-us
+  supportedLanguages:
+    en-us:
+      none: true
+  variables:
+    - stringVariable:
+        name: Flow.addressTo
+        initialValue:
+          lit: "0"
+        isInput: true
+        isOutput: false
+    - stringVariable:
+        name: Flow.ani
+        initialValue:
+          lit: "0"
+        isInput: true
+        isOutput: false
+    - stringVariable:
+        name: Flow.callBackNumber
+        initialValue:
+          noValue: true
+        isInput: false
+        isOutput: false
+    - stringVariable:
+        name: Flow.conversationId
+        initialValue:
+          noValue: true
+        isInput: true
+        isOutput: false
+    - stringVariable:
+        name: Flow.dnis
+        initialValue:
+          lit: "0"
+        isInput: true
+        isOutput: false
+    - stringVariable:
+        name: Flow.wrapupCode
+        initialValue:
+          lit: "0"
+        isInput: true
+        isOutput: false
+  settingsErrorHandling:
+    errorHandling:
+      endWorkflow:
+        none: true
+  states:
+    - state:
+        name: Initial State
+        refId: Initial State_10
+        actions:
+          - getConversationData:
+              name: Get Conversation Data
+              conversationId:
+                exp: Flow.conversationId
+              participantId:
+                noValue: true
+              attributes:
+                - attribute:
+                    name:
+                      lit: callbackNumber
+                    variable: Flow.callBackNumber
+          - callData:
+              name: Call Data Action
+              timeout:
+                lit:
+                  minutes: 1
+              category:
+                Callback SMS Integrations:
+                  dataAction:
+                    "Send SMS":
+                      inputs:
+                        from:
+                          lit: "{{callback_originating_sms_phonenumber}}"
+                        to:
+                          exp: Flow.callBackNumber
+                        body:
+                          exp: "\n\n\"We were trying to reach you for your scheduled callback.  If you would still like to speak with us, please call {{callback_phonenumber}}\""
+                      failureOutputs:
+                        errorCode:
+                          noValue: true
+                        status:
+                          noValue: true
+                        correlationId:
+                          noValue: true
+                        entityId:
+                          noValue: true
+                        entityName:
+                          noValue: true
+                        userMessage:
+                          noValue: true
+                        userParamsMessage:
+                          noValue: true
+                        userParams.key:
+                          noValue: true
+                        userParams.value:
+                          noValue: true
+                        details.errorCode:
+                          noValue: true
+                        details.fieldName:
+                          noValue: true
+                        details.entityId:
+                          noValue: true
+                        details.entityName:
+                          noValue: true
+              outputs:
+                success:
+                  actions:
+                    - setConversationData:
+                        name: Set Conversation Data
+                        conversationId:
+                          exp: Flow.conversationId
+                        participantId:
+                          noValue: true
+                        attributes:
+                          - attribute:
+                              name:
+                                lit: smsFollowupSent
+                              value:
+                                lit: "True"
+          - endWorkflow:
+              name: End Workflow
+              exitReason:
+                noValue: true
