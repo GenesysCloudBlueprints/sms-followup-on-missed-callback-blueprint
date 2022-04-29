@@ -8,4 +8,4 @@ This blueprint also demonstrates how to:
 * Build an Architect workflow for processing an incoming conversation event and triggering an SMS message off of it.
 * Build a Data action that invokes the Genesys Cloud SMS public api endpoint. 
 
-![Implement an automated SMS message when a callback is not answered](/blueprint/images/overview_no_numbers.png "Implement an automated SMS message when a callback is not answered")
+![Implement an automated SMS message when a callback is not answered](blueprint/images/overview.png "Implement an automated SMS message when a callback is not answered")

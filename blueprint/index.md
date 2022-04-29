@@ -3,7 +3,7 @@ title: Implement an automated SMS message when a callback is not answered
 author: john.carnell
 indextype: blueprint
 icon: blueprint
-image: images/overview_numbers.png
+image: images/overview.png
 category: 5
 summary: |
   This Genesys Cloud Developer Blueprint demonstrates how to send an SMS message to a customer when an agent attempts to reach customer on a callback and the customer is unavailable.
@@ -17,7 +17,7 @@ This Genesys cloud blueprint demonstrates how send an SMS message to a customer 
 In order to use this blueprint, you must have previously purchased an SMS-enabled number from Genesys Cloud. The phone number can be passed into the Terraform configuration used in this blueprint. Instructions for purchasing a Genesys Cloud SMS number can be found [here](https://help.mypurecloud.com/articles/purchase-sms-long-code-numbers/ "Goes to the purchase an SMS phone number page").
 ::: 
 
-![Implement an automated SMS message when a callback is not answered](blueprint/images/overview.png "Implement an automated SMS message when a callback is not answered")
+![Implement an automated SMS message when a callback is not answered](images/overview.png "Implement an automated SMS message when a callback is not answered")
 
 ## Scenario
 
@@ -157,7 +157,7 @@ After the process automation workflow is deployed, you can create a Genesys Clou
 
 Enter the following values for the callback tool:
 
-![Creating a callback](/blueprint/images/callback_tool.png "Create a callback using the Genesys Cloud developer center callback tool")
+![Creating a callback](images/callback_tool.png "Create a callback using the Genesys Cloud developer center callback tool")
 
 1. E.164 formatted phone number the customer can receive a text message to.
 2. A custom participant attribute containing the same E.164 formatted number as bullet #1 above. This number needs to be stored in a participant attribute because an Architect workflow will not have access to the DNIS number for the original call. This value needs to be stored in a participant attribute called callbackNumber. 
@@ -177,11 +177,11 @@ After you create the callback, you can:
 
 Shortly after you do this, you should see an alert popup indicating that there is a callback waiting to be picked up. The image below illustrates what you should expect:
 
-![Alerting on an incoming callback](blueprint/images/alerting.png "A callback alerting in agent's queue")
+![Alerting on an incoming callback](images/alerting.png "A callback alerting in agent's queue")
 
 To trigger the workflow, you need to press the Wrap-codes button, select the "Cust unavailable" wrap-up code and click the Done button. This will end the call. Shortly after this you should received an SMS text message to the phone number you configured in the callback tool. The screenshot below illustrates this:
 
-![SMS Message Sent](blueprint/images/sms_alerting.png "Shows the SMS message that will be sent to the customer")
+![SMS Message Sent](images/sms_alerting.png "Shows the SMS message that will be sent to the customer")
 
 ## Additional resources
 * [Genesys Cloud About creating an OAuth client](https://help.mypurecloud.com/articles/create-an-oauth-client/ "Goes to the About creating an OAuth client article") article in the Genesys Cloud Resource Center
