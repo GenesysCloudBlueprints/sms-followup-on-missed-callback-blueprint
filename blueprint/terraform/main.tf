@@ -59,6 +59,7 @@ resource "genesyscloud_flow" "sms_eventrigger_flow" {
   substitutions = {
     callback_originating_sms_phonenumber            = var.callback_originating_sms_phonenumber
     callback_phonenumber                            = var.callback_phonenumber
+    callback_division                               = var.callback_division
   }
 }
 

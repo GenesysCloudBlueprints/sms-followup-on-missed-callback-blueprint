@@ -23,3 +23,8 @@ variable "callback_agent_email" {
   description = "Email address of the agent we want to associate with the queue. This will be the agent who is going to answer the callback and mark the customer as unavailable"
 }
 
+variable "callback_division" {
+  type        = string
+  description = "Division this flow is associated with"
+}
+

@@ -52,7 +52,6 @@ This blueprint explains how to use the following Genesys Cloud capabilities:
 * **CX as Code** - A Genesys Cloud DevOps tool that allows Genesys Cloud configuration to be stored in source control as text files and then deployed via CI/CD pipeline.
 
 ## Software development kits
-
 No Genesys Cloud SDKs are needed for this blueprint solution. 
 
 ## Prerequisites
@@ -122,6 +121,7 @@ In the blueprint/terraform/dev.auto.tfvars file, set the following values:
 * `callback_originating_sms_phonenumber` - This is the SMS-enabled phone number purchased from Genesys Cloud. This number is in E.164 format and will be the originating phone number sending the SMS message.
 * `callback_phonenumber`- This will be a phone number injected into the text message sent to the customer. For the purposes of this demonstration this phone number is the phone number the customer will be asked to call back to schedule another followup call.
 * `callback_agent_email`- This is the email address of the agent assigned to the queue created for this demonstration.
+* `callback_division`- The division the flow will be deployed to. Most new flows will deploy by default to the "Home" division.
 
 The following is an example of the dev.auto.tfvars file that was created by the author of this blueprint.
 
@@ -131,6 +131,7 @@ callback_sms_oauthsecret="vjbhxWqwObEg7ZYGd9654o0PC2iKu22OwCPz0pgQj5M"
 callback_originating_sms_phonenumber="+19206775555"
 callback_phonenumber="+18005551213"
 callback_agent_email="john.smith@genesys.com"
+callback_division="Home"
 ```
 
 :::primary
@@ -140,6 +141,8 @@ The above values are not actual values that can be used within your own deployme
 ### Run Terraform
 
 You are now ready to run this blueprint solution for your organization. ßChange to the blueprints/terraform folder and issue these commands:
+
+* `terraform init` - This should be run the first time you pulldown this blueprint into a "clean" environment. This pulls down the terraform plug-in, CX as Code provider and any remote modules.
 
 * `terraform plan` - This executes a trial run against your Genesys Cloud organization and shows you a list of all the AWS, and Genesys Cloud resources created. Review this list and make sure you are comfortable with the activity being undertake before continuing to the second step.
 
