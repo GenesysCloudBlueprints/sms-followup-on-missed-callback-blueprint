@@ -1,11 +1,15 @@
-# Implement an automated SMS message when a callback is not answered (DRAFT)
+# Implement an automated SMS message when a callback is not answered
 
 This Genesys cloud blueprint demonstrates how to send an SMS message to a customer when an agent attempts to reach a customer on a callback and the customer is unavailable.
 
 This blueprint also demonstrates how to:
 
-* Build an event trigger that will listen to and inspect a conversation event and look for unavailable customer callback wrap-up codes.
-* Build an Architect workflow for processing an incoming conversation event and triggering an SMS message off of it.
-* Build a Data action that invokes the Genesys Cloud SMS public api endpoint. 
+* Build an event trigger that checks the conversation events and looks for wrap-up codes which are selected for callback due to customer unavailability.
+* Build an Architect workflow for processing an incoming conversation event and send an SMS message to the customer.
+* Build a data action that invokes the Genesys Cloud SMS public API endpoint. 
 
-![Implement an automated SMS message when a callback is not answered](blueprint/images/overview.png "Implement an automated SMS message when a callback is not answered")
+![Implement an automated SMS message when a callback is not answered](blueprint/images/sms-process-automation.png "Implement an automated SMS message when a callback is not answered")
+
+:::primary
+You can be part of the process automation trigger beta program. To participate, contact the Product Manager Richard Schott at richard.schott@genesys.com.
+:::
