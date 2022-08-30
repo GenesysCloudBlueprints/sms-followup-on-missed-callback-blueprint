@@ -9,7 +9,7 @@ summary: |
   This Genesys Cloud Developer Blueprint demonstrates how to send an SMS message to a customer when an agent attempts to reach the customer on a callback and the customer is unavailable.
 ---
 
-# Implement an automated SMS message when a callback is not answered (DRAFT)
+# Implement an automated SMS message when a callback is not answered
 
 This Genesys cloud blueprint demonstrates how to send an SMS message to a customer when an agent attempts to reach the customer on a callback and the customer is unavailable. All the components in this solution can be deployed using Terraform and the Genesys Cloud CX as Code provider.
 
