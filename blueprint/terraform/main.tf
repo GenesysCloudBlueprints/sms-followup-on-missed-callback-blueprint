@@ -72,23 +72,26 @@ resource "genesyscloud_processautomation_trigger" "trigger" {
     id   = genesyscloud_flow.sms_eventrigger_flow.id
     type = "Workflow"
   }
-  match_criteria {
-        json_path =  "queueId"
-        operator  =  "Equal"
-        value     =  genesyscloud_routing_queue.sms_callback_queue.id
-  }
-  match_criteria  {
-        json_path =  "wrapupCode"
-        operator  =  "Equal"
-        value     =  genesyscloud_routing_wrapupcode.cust_unavailable.id
-  }
-  match_criteria{
-        json_path =  "mediaType"
-        operator  =  "Equal"
-        value     =  "CALLBACK"
-  }
+  
+  match_criteria = jsonencode([
+        {
+            "jsonPath": "queueId",
+            "operator": "Equal",
+            "value": genesyscloud_routing_queue.sms_callback_queue.id
+        },
+        {
+            "jsonPath": "wrapupCode",
+            "operator":  "Equal",
+            "value":  genesyscloud_routing_wrapupcode.cust_unavailable.id
+        },
+        {
+            "jsonPath": "mediaType",
+            "operator":  "Equal",
+            "value": "CALLBACK"
+        }
+    ])
 
-   event_ttl_seconds = 60
+  event_ttl_seconds = 60
 } 
 
 
