@@ -2,12 +2,9 @@ terraform {
   required_providers {
     genesyscloud = {
      source = "mypurecloud/genesyscloud"
+     version= "1.23.0"
     }
   }
-}
-
-provider "genesyscloud" {
-  sdk_debug = false
 }
 
 data "genesyscloud_user" "callback_agent" {
@@ -56,6 +53,7 @@ resource "genesyscloud_flow" "sms_eventrigger_flow" {
     module.callback_sms_dataaction
   ]  
   filepath = "${path.module}/architect/callback_sms_eventrigger_flow.yaml.tftpl"
+  file_content_hash = filesha256("${path.module}/architect/callback_sms_eventrigger_flow.yaml.tftpl")
   substitutions = {
     callback_originating_sms_phonenumber            = var.callback_originating_sms_phonenumber
     callback_phonenumber                            = var.callback_phonenumber
@@ -72,23 +70,26 @@ resource "genesyscloud_processautomation_trigger" "trigger" {
     id   = genesyscloud_flow.sms_eventrigger_flow.id
     type = "Workflow"
   }
-  match_criteria {
-        json_path =  "queueId"
-        operator  =  "Equal"
-        value     =  genesyscloud_routing_queue.sms_callback_queue.id
-  }
-  match_criteria  {
-        json_path =  "wrapupCode"
-        operator  =  "Equal"
-        value     =  genesyscloud_routing_wrapupcode.cust_unavailable.id
-  }
-  match_criteria{
-        json_path =  "mediaType"
-        operator  =  "Equal"
-        value     =  "CALLBACK"
-  }
+  
+  match_criteria = jsonencode([
+        {
+            "jsonPath": "queueId",
+            "operator": "Equal",
+            "value": genesyscloud_routing_queue.sms_callback_queue.id
+        },
+        {
+            "jsonPath": "wrapupCode",
+            "operator":  "Equal",
+            "value":  genesyscloud_routing_wrapupcode.cust_unavailable.id
+        },
+        {
+            "jsonPath": "mediaType",
+            "operator":  "Equal",
+            "value": "CALLBACK"
+        }
+    ])
 
-   event_ttl_seconds = 60
+  event_ttl_seconds = 60
 } 
 
 
