@@ -2,7 +2,7 @@ terraform {
   required_providers {
     genesyscloud = {
      source = "mypurecloud/genesyscloud"
-     version= "1.23.0"
+    #  version= "1.23.0"
     }
   }
 }
@@ -53,7 +53,6 @@ resource "genesyscloud_flow" "sms_eventrigger_flow" {
     module.callback_sms_dataaction
   ]  
   filepath = "${path.module}/architect/callback_sms_eventrigger_flow.yaml.tftpl"
-  file_content_hash = filesha256("${path.module}/architect/callback_sms_eventrigger_flow.yaml.tftpl")
   substitutions = {
     callback_originating_sms_phonenumber            = var.callback_originating_sms_phonenumber
     callback_phonenumber                            = var.callback_phonenumber
